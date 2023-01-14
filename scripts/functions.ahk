@@ -1,3 +1,10 @@
+InitializeTray() {
+  IfExist, %ICON_ACTIVE%
+    Menu, Tray, Icon, %ICON_ACTIVE%
+
+  Menu, Tray, Tip , TheWall by Specnr`n Right-click -> menu
+}
+
 SendLog(lvlText, msg) {
   tc := A_TickCount
   file := FileOpen("data/log.log", "a -rw")

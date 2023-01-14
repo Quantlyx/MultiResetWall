@@ -8,5 +8,6 @@ test.ahk
 *.ops
 *.txt
 /data/*.json
+/data/*.reload
 /media/*
 *-Mach.*

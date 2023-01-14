@@ -70,6 +70,8 @@ global LOG_LEVEL_INFO = "INFO"
 global LOG_LEVEL_WARNING = "WARN"
 global LOG_LEVEL_ERROR = "ERR"
 
+global ICON_ACTIVE := A_ScriptDir "\media\icon_default.ico"
+
 FileDelete, data/log.log
 FileDelete, %dailyAttemptsFile%
 if !FileExist("data")
@@ -78,6 +80,7 @@ if !FileExist("data")
 SendLog(LOG_LEVEL_INFO, "Wall launched")
 
 SetTheme(theme)
+InitializeTray()
 GetAllPIDs()
 
 if (obsControl == "C") {
