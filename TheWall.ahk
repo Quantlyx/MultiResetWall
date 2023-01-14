@@ -70,7 +70,8 @@ global LOG_LEVEL_INFO = "INFO"
 global LOG_LEVEL_WARNING = "WARN"
 global LOG_LEVEL_ERROR = "ERR"
 
-global ICON_ACTIVE := A_ScriptDir "\media\icon_default.ico"
+global ICON_ACTIVE := A_ScriptDir "\media\icon_active.ico"
+global ICON_NOINSTANCE := A_ScriptDir "\media\icon_noinstance.ico"
 
 FileDelete, data/log.log
 FileDelete, %dailyAttemptsFile%
@@ -80,7 +81,6 @@ if !FileExist("data")
 SendLog(LOG_LEVEL_INFO, "Wall launched")
 
 SetTheme(theme)
-InitializeTray()
 GetAllPIDs()
 
 if (obsControl == "C") {
@@ -173,6 +173,8 @@ if IsProcessElevated(obsPid) {
   MsgBox, Your OBS was run as admin which may cause wall hotkeys to not work. If this happens restart OBS and launch it normally.
     SendLog(LOG_LEVEL_WARNING, "OBS was run as admin which may cause wall hotkeys to not work")
 }
+
+; Menu, Tray, Tip , TheWall by Specnr`n Right-click -> menu
 
 Menu, Tray, Add, Delete Worlds, WorldBop
 

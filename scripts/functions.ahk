@@ -1,8 +1,13 @@
-InitializeTray() {
-  IfExist, %ICON_ACTIVE%
-    Menu, Tray, Icon, %ICON_ACTIVE%
+SetTrayIcon(passedIcon) {
+    if (FileExist(passedIcon)) {
+      Menu, Tray, Icon, %passedIcon%
+    }
+    else
+      SendLog(LOG_LEVEL_WARNING, "Icon " passedIcon " not found. Check if it is in " A_ScriptDir "\themes\" theme)
+}
 
-  Menu, Tray, Tip , TheWall by Specnr`n Right-click -> menu
+SetTrayText(passedText:="") {
+  Menu, Tray, Tip , TheWall by Specnr`n Right-click -> menu`n`n %passedText%
 }
 
 SendLog(lvlText, msg) {
@@ -318,10 +323,14 @@ GetAllPIDs()
   SendLog(LOG_LEVEL_INFO, "Getting all Minecraft directory and PID data")
   instances := GetInstanceTotal()
   if !instances {
+    SetTrayIcon(ICON_NOINSTANCE)
+    SetTrayText("No instances found")
     MsgBox, No open instances detected.
     SendLog(LOG_LEVEL_WARNING, "No open instances detected, and make sure that fabric is installed.")
     Return
   }
+  SetTrayIcon(ICON_ACTIVE)
+  SetTrayText()
   SendLog(LOG_LEVEL_INFO, Format("{1} Instances detected", instances))
   ; If there are more/less instances than usual, rebuild cache
   if hasMcDirCache && GetLineCount("data/mcdirs.txt") != instances {
